@@ -1,3 +1,5 @@
+// lib/ui/models/ingredient.dart
+
 class Ingredient {
   final String name;
   final double quantity;

@@ -1,21 +1,60 @@
+// lib/main.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_streams_lab/ui/bookmarks/bookmarks.dart'; // Import the BookmarksScreen
-import 'package:flutter_streams_lab/ui/groceries/groceries.dart'; // Import the GroceriesScreen
+import 'package:flutter_streams_lab/ui/bookmarks/bookmarks.dart';
+import 'package:flutter_streams_lab/ui/groceries/groceries.dart';
 
 void main() {
-  runApp(ProviderScope(child: MyApp())); // Use ProviderScope for Riverpod
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Streams App',
+      title: 'Flutter Streams Lab',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: BookmarksScreen(),  // Set the BookmarksScreen as the home screen
+      home: const MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Flutter Streams Lab')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => BookmarksPage()),
+                );
+              },
+              child: const Text('Go to Bookmarks'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => GroceriesPage()),
+                );
+              },
+              child: const Text('Go to Groceries'),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

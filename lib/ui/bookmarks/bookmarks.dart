@@ -1,17 +1,17 @@
+// lib/ui/bookmarks/bookmarks.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_streams_lab/ui/providers.dart'; // Import the providers
-import 'package:flutter_streams_lab/data/models/recipe.dart'; // Import the Recipe model
-import 'package:flutter_streams_lab/data/repository.dart'; // Import the Repository
+import 'package:flutter_streams_lab/ui/providers.dart';
+import 'package:flutter_streams_lab/ui/models/recipe.dart';
 
-class BookmarksScreen extends ConsumerWidget {
+class BookmarksPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // Access the repository using the provider
-    final repository = ref.read(repositoryProvider);
+    // Access the repository provider
+    final repository = ref.watch(repositoryProvider);
 
     return Scaffold(
-      appBar: AppBar(title: Text("Bookmarks")),
+      appBar: AppBar(title: Text('Bookmarks')),
       body: StreamBuilder<List<Recipe>>(
         stream: repository.getRecipesStream(),
         builder: (context, snapshot) {
@@ -21,12 +21,7 @@ class BookmarksScreen extends ConsumerWidget {
           if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           }
-          if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(child: Text('No recipes available.'));
-          }
-
-          final recipes = snapshot.data!;
-
+          final recipes = snapshot.data ?? [];
           return ListView.builder(
             itemCount: recipes.length,
             itemBuilder: (context, index) {

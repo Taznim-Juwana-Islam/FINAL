@@ -1,17 +1,16 @@
+// lib/ui/groceries/groceries.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_streams_lab/ui/providers.dart'; // Import the providers
-import 'package:flutter_streams_lab/data/models/ingredient.dart'; // Import the Ingredient model
-import 'package:flutter_streams_lab/data/repository.dart'; // Import the Repository
+import 'package:flutter_streams_lab/ui/providers.dart';
+import 'package:flutter_streams_lab/ui/models/ingredient.dart';
 
-class GroceriesScreen extends ConsumerWidget {
+class GroceriesPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // Access the repository using the provider
-    final repository = ref.read(repositoryProvider);
+    final repository = ref.watch(repositoryProvider);
 
     return Scaffold(
-      appBar: AppBar(title: Text("Groceries")),
+      appBar: AppBar(title: Text('Groceries')),
       body: StreamBuilder<List<Ingredient>>(
         stream: repository.getIngredientsStream(),
         builder: (context, snapshot) {
@@ -21,12 +20,7 @@ class GroceriesScreen extends ConsumerWidget {
           if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           }
-          if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(child: Text('No ingredients available.'));
-          }
-
-          final ingredients = snapshot.data!;
-
+          final ingredients = snapshot.data ?? [];
           return ListView.builder(
             itemCount: ingredients.length,
             itemBuilder: (context, index) {

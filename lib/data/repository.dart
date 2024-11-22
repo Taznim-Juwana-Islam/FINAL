@@ -1,6 +1,5 @@
-import 'dart:async';
-import 'models/recipe.dart';
-import 'models/ingredient.dart';
+import 'package:flutter_streams_lab/ui/models/recipe.dart';
+import 'package:flutter_streams_lab/ui/models/ingredient.dart';
 
 class Repository {
   // Example stream to simulate getting recipes

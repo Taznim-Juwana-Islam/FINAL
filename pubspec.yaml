@@ -1,21 +1,19 @@
 name: flutter_streams_lab
-description: A Flutter project implementing streams for bookmarks and grocery lists.
+description: A new Flutter project to demonstrate streams and Riverpod
 
-publish_to: 'none' # Remove this line if you plan to publish the package
-
-version: 1.0.0+1
-
+# Add the environment section specifying Dart SDK compatibility
 environment:
-  sdk: ">=3.5.0 <4.0.0"
+  sdk: ">=3.5.0 <4.0.0"  # Adjust the version based on your Flutter version
 
 dependencies:
   flutter:
     sdk: flutter
-  flutter_riverpod: ^2.0.0  
+  flutter_riverpod: ^2.0.0
+  # Add other dependencies as needed
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
 flutter:
-  assets:
-    - assets/images/  
+  uses-material-design: true
